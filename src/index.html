@@ -4,14 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
   <title>Stencil Component Starter</title>
-
   <script type="module" src="/build/todo-app.esm.js"></script>
   <script nomodule src="/build/todo-app.js"></script>
 
 </head>
 <body>
-
-  <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
-
+  <todo-container>
+    <span role="heading" slot="title">Todo in Web Components</span>
+    <div slot="completed-items">
+      <todo-item text="I'm complete!"></todo-item>
+    </div> 
+    <div slot="todo-items">
+      <todo-item text="I'm not done"></todo-item>
+    </div>
+    <todo-creator/>
+  </todo-container>
+  <script>
+    function handleTodoClicked(e){
+      console.log(e.detail.text, e.detail.checked)
+    }
+    document.addEventListener("todoChecked", handleTodoClicked)
+  </script>
 </body>
 </html>
