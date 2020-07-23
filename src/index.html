@@ -11,19 +11,13 @@
 <body>
   <todo-container>
     <span role="heading" slot="title">Todo in Web Components</span>
-    <div slot="completed-items">
-      <todo-item text="I'm complete!"></todo-item>
-    </div> 
     <div slot="todo-items">
-      <todo-item text="I'm not done"></todo-item>
+      <todo-item></todo-item>
     </div>
-    <todo-creator/>
+    <div slot="completed-items"></div> 
+    <div slot="create">
+      <todo-creator/>
+    </div>
   </todo-container>
-  <script>
-    function handleTodoClicked(e){
-      console.log(e.detail.text, e.detail.checked)
-    }
-    document.addEventListener("todoChecked", handleTodoClicked)
-  </script>
 </body>
 </html>
