@@ -5,9 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { TodoCheckedEvent, } from "./components/todo-item/todo-item";
+import { TodoCreatedEvent, } from "./components/todo-creator/todo-creator";
+import { TodoCompletedEvent, TodoReversed, } from "./components/todo-item/todo-item";
 export namespace Components {
     interface TodoContainer {
+    }
+    interface TodoCreator {
     }
     interface TodoItem {
         "checked": boolean;
@@ -21,6 +24,12 @@ declare global {
         prototype: HTMLTodoContainerElement;
         new (): HTMLTodoContainerElement;
     };
+    interface HTMLTodoCreatorElement extends Components.TodoCreator, HTMLStencilElement {
+    }
+    var HTMLTodoCreatorElement: {
+        prototype: HTMLTodoCreatorElement;
+        new (): HTMLTodoCreatorElement;
+    };
     interface HTMLTodoItemElement extends Components.TodoItem, HTMLStencilElement {
     }
     var HTMLTodoItemElement: {
@@ -29,19 +38,25 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "todo-container": HTMLTodoContainerElement;
+        "todo-creator": HTMLTodoCreatorElement;
         "todo-item": HTMLTodoItemElement;
     }
 }
 declare namespace LocalJSX {
     interface TodoContainer {
     }
+    interface TodoCreator {
+        "onTodoCreated"?: (event: CustomEvent<TodoCreatedEvent>) => void;
+    }
     interface TodoItem {
         "checked"?: boolean;
-        "onTodoChecked"?: (event: CustomEvent<TodoCheckedEvent>) => void;
+        "onTodoCompleted"?: (event: CustomEvent<TodoCompletedEvent>) => void;
+        "onTodoReversed"?: (event: CustomEvent<TodoReversed>) => void;
         "text"?: string;
     }
     interface IntrinsicElements {
         "todo-container": TodoContainer;
+        "todo-creator": TodoCreator;
         "todo-item": TodoItem;
     }
 }
@@ -50,6 +65,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "todo-container": LocalJSX.TodoContainer & JSXBase.HTMLAttributes<HTMLTodoContainerElement>;
+            "todo-creator": LocalJSX.TodoCreator & JSXBase.HTMLAttributes<HTMLTodoCreatorElement>;
             "todo-item": LocalJSX.TodoItem & JSXBase.HTMLAttributes<HTMLTodoItemElement>;
         }
     }
