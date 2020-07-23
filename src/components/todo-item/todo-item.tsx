@@ -1,4 +1,12 @@
-import { Component, Listen, h, Prop, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Listen,
+  h,
+  Prop,
+  Event,
+  EventEmitter,
+  Host,
+} from "@stencil/core";
 
 export interface TodoCompletedEvent {
   text: string;
@@ -24,15 +32,20 @@ export class TodoItem {
   @Listen("click")
   handleClick() {
     if (this.checked) {
-      this.todoReversed.emit({ text: this.text, checked: this.checked });
+      this.todoReversed.emit({
+        text: this.text,
+        checked: this.checked,
+      });
     } else {
-      this.todoCompleted.emit({ text: this.text, checked: this.checked });
+      this.todoCompleted.emit({
+        text: this.text,
+        checked: this.checked,
+      });
     }
     this.checked = !this.checked;
   }
 
   render() {
-    return <div class={this.getCSSClass()}>{this.text}</div>;
+    return <Host>{this.text}</Host>;
   }
-  getCSSClass = () => (this.checked ? "todo-item checked" : "todo-item");
 }

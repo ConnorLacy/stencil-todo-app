@@ -11,6 +11,7 @@ export namespace Components {
     interface TodoContainer {
     }
     interface TodoCreator {
+        "text": string;
     }
     interface TodoItem {
         "checked": boolean;
@@ -47,6 +48,7 @@ declare namespace LocalJSX {
     }
     interface TodoCreator {
         "onTodoCreated"?: (event: CustomEvent<TodoCreatedEvent>) => void;
+        "text"?: string;
     }
     interface TodoItem {
         "checked"?: boolean;
