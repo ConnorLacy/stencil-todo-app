@@ -2,10 +2,10 @@ import {
   Component,
   Host,
   h,
+  Prop,
   Element,
   Event,
   EventEmitter,
-  State,
 } from "@stencil/core";
 
 export interface TodoCreatedEvent {
@@ -18,7 +18,7 @@ export interface TodoCreatedEvent {
   styleUrl: "todo-creator.css",
 })
 export class TodoCreator {
-  @State() text: string = "";
+  @Prop() text: string = "";
   @Element() el!: HTMLElement;
   @Event() todoCreated: EventEmitter<TodoCreatedEvent>;
 
@@ -28,8 +28,8 @@ export class TodoCreator {
   }
 
   handleChange(event: UIEvent) {
-    const input = event.target as HTMLInputElement
-    const value = input.value
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
     this.text = value;
   }
 
