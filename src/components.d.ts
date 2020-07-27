@@ -11,6 +11,7 @@ export namespace Components {
     interface TodoContainer {
     }
     interface TodoCreator {
+        "clearInput": () => Promise<void>;
         "text": string;
     }
     interface TodoItem {
