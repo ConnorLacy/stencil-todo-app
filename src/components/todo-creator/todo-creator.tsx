@@ -6,6 +6,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  Method,
 } from "@stencil/core";
 
 export interface TodoCreatedEvent {
@@ -25,6 +26,12 @@ export class TodoCreator {
   handleClick(event: UIEvent) {
     event.preventDefault();
     this.todoCreated.emit({ text: this.text, checked: false });
+    this.clearInput()
+  }
+
+  @Method()
+  async clearInput(){
+    this.text = ""
   }
 
   handleChange(event: UIEvent) {
